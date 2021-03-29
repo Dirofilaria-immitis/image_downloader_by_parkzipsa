@@ -73,7 +73,11 @@ chrome.commands.onCommand.addListener(async function(command) {
 //단축키: command + shift + z
 
 
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentDocument
+// https://stackoverflow.com/questions/13266192/accessing-iframe-from-chrome-extension
+// 이걸로 아이프레임 이슈 해결
 
+// 불완전하지만 새 탭에서 여는 명령어로 php url 이미지 이슈 해결
 
 
 
@@ -108,3 +112,7 @@ chrome.commands.onCommand.addListener(async function(command) {
 
     ////////////////////////맥만 사용 가능. menifest version = 2 // browser_action <= action  // version3에서는 chrome.tabs.executeScript 사용 불가능하고 version2에서는
     /////////////////////// downloads.download 사용 불가능 한 듯//////
+
+
+
+
