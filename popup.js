@@ -33,10 +33,20 @@ function downloadSizeProto(){
                 }   //iframe image
 
 
+                for (var k=0; k<countimage; k++) {
+                  var testphp = imgs[k].src;
+                  var checkingphp = /php/;
+                  var found = testphp.match(checkingphp);
+                  if(found){
+                    window.open(testphp);
+                  } 
+                }   //php image. url을 extension으로 올려서 하는 방법은 에러가 나는데, 이 상태로는 php 이미지가 있으면 그것만 받고 끝나버린다.
+                    // 일단 이대로 쓰고 나중에 php 배우고 수정할 것. 그래도 iframe 이슈는 해결했으니..
+
+
 
 
                   var done = imgSrcs.concat(fifinalurl); 
-                  console.log(done);
 
 
 
@@ -55,16 +65,8 @@ letsgo.addEventListener("click", async () => {
     }, function(result){
       for(const frameResult of result){
         console.log(frameResult.result)
-
-        
         for (var i = 0; i < frameResult.result.length; i++) {
-          var testphp = frameResult.result[i];
-                    var checkingphp = /php/;
-                    console.log(testphp);
-                    var found = testphp.match(checkingphp);
-                    if(found){
-                      window.open(testphp);
-                    }
+          if(frameResult.result[i].match(/php/)) continue
           chrome.downloads.download({
                    url: frameResult.result[i]
                  });
@@ -73,6 +75,8 @@ letsgo.addEventListener("click", async () => {
     });
   });
 //버튼 눌렀을 때 실행
+
+
 
 
 
