@@ -1,37 +1,62 @@
-
-// 2.0 팝업창에 띄워서 원하는 사진 눌러서 다운받을 수 있도록
-//3.0 네이버는 안되는데, iframe 문제인듯 나중에 tabid 쪽에서 설명서 읽고 다시 설정할 것
-// 4.0 특정 웹페이 사진들이 네트워크 오류 일으킴. URL 문제인 것 같은데 콘솔창이나 ALERT 창으로 디버깅 하면서 수정할 것
-
-
-
 let letsgo = document.getElementById("download");
 
-function downloadAll(){
-                    var imgs = document.querySelectorAll("img");
-                    var countimage = document.querySelectorAll("img").length;
-                    var imgSrcs = [];
-                    for (var i = 0; i < countimage; i++) {
-                          imgSrcs.push(imgs[i].src);
-                        };
-                            var url = imgSrcs;
-                            return url
-                }
-//전체 이미지
-
-
 function downloadSizeProto(){
+
+
              var imgs = document.querySelectorAll("img");
-             var countimage = document.querySelectorAll("img").length;
+             var countimage = imgs.length;
              var imgSrcs = [];
-                 for (var i = 0; i < countimage; i++) {
-                if(imgs[i].width <100 || imgs[i].height<100) continue;
-                   imgSrcs.push(imgs[i].src);
-                   }
-                           var url = imgSrcs;
-                           return url
-                           }
-//사이즈 조절한 이미지
+
+
+                 for (var j = 0; j < countimage; j++) {
+                if(imgs[j].width <100 || imgs[j].height<100) continue;
+                   imgSrcs.push(imgs[j].src);
+                   }  //normal image
+
+
+
+                if(document.getElementsByTagName('iframe')){
+                  var takeiframe = document.getElementsByTagName('iframe');
+                  var iframelength = takeiframe.length
+                  var finalurl = []
+                  for(var i = 0; i<iframelength; i++){
+                    var iframeimg = takeiframe[i].contentWindow.document.querySelectorAll("img");
+                    var iframeimglength = iframeimg.length;
+                    var iframeimgSrcs = []; 
+                    for(var v = 0; v < iframeimglength; v++){
+                      var iframegetimgSrcs = iframeimg[v].src;
+                      if(iframeimg[v].width <200 || iframeimg[v].height<200) continue;
+                      iframeimgSrcs.push(iframegetimgSrcs);
+                    }
+                    var fifinalurl = finalurl.concat(iframeimgSrcs);
+                  }
+                }   //iframe image
+
+
+
+
+                  var done = imgSrcs.concat(fifinalurl); 
+                  console.log(done);
+
+
+
+
+                  for (var k=0; k<countimage; k++) {
+                    var testphp = imgs[k].src;
+                    var checkingphp = /php/;
+                    var found = testphp.match(checkingphp);
+                    if(found){
+                      window.open(testphp);
+                    } 
+                  }   //php image
+
+
+
+
+                  return done;
+          }
+
+
 
 
 letsgo.addEventListener("click", async () => {
@@ -51,6 +76,8 @@ letsgo.addEventListener("click", async () => {
     });
   });
 //버튼 눌렀을 때 실행
+
+
 
 
 chrome.commands.onCommand.addListener(async function(command) {
@@ -73,15 +100,12 @@ chrome.commands.onCommand.addListener(async function(command) {
 //단축키: command + shift + z
 
 
-// https://developer.mozilla.org/en-US/docs/Web/API/HTMLIFrameElement/contentDocument
-// https://stackoverflow.com/questions/13266192/accessing-iframe-from-chrome-extension
-// 이걸로 아이프레임 이슈 해결
-
-// 불완전하지만 새 탭에서 여는 명령어로 php url 이미지 이슈 해결
 
 
 
 
+// var test = document.getElementsByTagName('iframe')[0].contentWindow.document.getElementsByTagName("img")[0];
+// iframe 이슈 해결 코드
 
 ////////////////////////////////////////////////prototype////////////////////////////////////////////////
 
