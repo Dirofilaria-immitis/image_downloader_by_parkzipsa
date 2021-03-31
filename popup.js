@@ -41,18 +41,6 @@ function downloadSizeProto(){
 
 
 
-                  for (var k=0; k<countimage; k++) {
-                    var testphp = imgs[k].src;
-                    var checkingphp = /php/;
-                    var found = testphp.match(checkingphp);
-                    if(found){
-                      window.open(testphp);
-                    } 
-                  }   //php image
-
-
-
-
                   return done;
           }
 
@@ -67,7 +55,16 @@ letsgo.addEventListener("click", async () => {
     }, function(result){
       for(const frameResult of result){
         console.log(frameResult.result)
+
+        
         for (var i = 0; i < frameResult.result.length; i++) {
+          var testphp = frameResult.result[i];
+                    var checkingphp = /php/;
+                    console.log(testphp);
+                    var found = testphp.match(checkingphp);
+                    if(found){
+                      window.open(testphp);
+                    }
           chrome.downloads.download({
                    url: frameResult.result[i]
                  });
