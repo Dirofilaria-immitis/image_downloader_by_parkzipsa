@@ -1,27 +1,73 @@
 body{
   margin: 0;
+  width: 300px;
+  padding: 5px;
+  border-radius: 20px;
 }
 
-button {
-  margin-top: 3px;
-  margin-left: 3px;
-  margin-right: 3px;
-  height: 30px;
-  width: 30px;
+.buttonbox{
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+
+.btn{
+  border-radius: 5px;
+  display: inline-block;
+  width: 140px;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:40px;
+  font-size:1.6em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.btn:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.btn:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.btn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
+.footer{
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+#alarm{
+  width: 280px;
+  height:30px;
+  border-radius: 5px;
+  margin-top: 5px;
+  background-color: #dddddd;
+  color: "#6f9eaf"
+  border-top: 1px solid black;
+  text-align: center;
+  box-shadow: none;
+font-size:1.6em;
   outline: none;
   border: none;
-  border-radius: 3px;
-  background-image: url(image/downloadlogo_default.png);
-  background-size: cover;
-  background-position: center;
-}
-
-button.current {
-  box-shadow: 0 0 0 2px white,
-              0 0 0 4px black;
-}
-
-
-button:hover{
-  background-image: url(image/downloadlogo_hover.png);
+  cursor:default;
 }
